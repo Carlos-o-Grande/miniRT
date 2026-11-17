@@ -1,0 +1,89 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   hooks_menu.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cjoao-de <cjoao-de@student.42lisboa.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/03/11 12:45:03 by cjoao-de          #+#    #+#             */
+/*   Updated: 2025/04/16 23:35:09 by cjoao-de         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../includes/minirt.h"
+
+int	menu_mouse(int button, int x, int y, void *param)
+{
+	t_minirt	*p;
+
+	p = (t_minirt *)param;
+	if (button == 1)
+	{
+		if ((x >= 40 && x <= 80) && (y >= 430 && y <= 470))
+			radio_one(p);
+		if ((x >= 40 && x <= 80) && (y >= 530 && y <= 570))
+			radio_two(p);
+		if ((x >= 40 && x <= 80) && (y >= 480 && y <= 520))
+			radio_three(p);
+		if ((x >= 40 && x <= 80) && (y >= 580 && y <= 620))
+			radio_four(p);
+		if ((x >= 40 && x <= 80) && (y >= 620 && y <= 660))
+			radio_five(p);
+		if ((x >= 40 && x <= 80) && (y >= 660 && y <= 700))
+			radio_six(p);
+		if ((x >= 40 && x <= 80) && (y >= 700 && y <= 740))
+			radio_seven(p);
+		if ((x >= MW - 181 - 80 && x <= MW - 80) && (y >= 350 && y <= 404))
+			render_bt(p);
+		if ((x >= MW - p->assets.bt_clrpick.img.width - 30 && x <= MW - 30) \
+			&& (y >= 40 && y <= p->assets.bt_clrpick.img.height + 40))
+			color_picker(p, x, y);
+		if ((x >= 40 && x <= p->assets.bt_gradient.img.width + 40) \
+			&& (y >= 226 && y <= 326 + p->assets.bt_gradient.img.height))
+			attribute_picker(p, x, y);
+		if ((x >= 40 && x <= 320) && (y >= 374 && y <= 424))
+			set_quality(p, x);
+	}
+	return (render_menu(p), 1);
+}
+// printf("Mouse in %s, button %d at %dx%d.\n", MENU_NAME, button, x, y);
+
+int	menu_keys(int keysym, t_minirt *s)
+{
+	if (keysym == XK_h)
+	{
+		if (!s->scene.cam.progressive_enabled)
+		{
+			s->scene.cam.progressive_enabled = 1;
+			reset_progressive_render(s);
+			print_clean(s);
+			ft_printf("Progressive render mode: ON\n");
+		}
+		else
+		{
+			s->scene.cam.progressive_target_passes += PROGRESSIVE_INCREMENT;
+			if (s->scene.cam.progressive_target_passes > PROGRESSIVE_MAX_PASSES)
+				s->scene.cam.progressive_target_passes = PROGRESSIVE_MAX_PASSES;
+			print_clean(s);
+			ft_printf("Progressive target: %d passes (max: %d)\n",
+				s->scene.cam.progressive_target_passes, PROGRESSIVE_MAX_PASSES);
+		}
+	}
+	else if (keysym == XK_Tab)
+	{
+		s->menu.objects = s->menu.objects->next;
+		if (s->menu.objects == NULL)
+		{
+			print_clean(s);
+			s->menu.objects = s->scene.objects;
+			ft_printf("looped figure list\n");
+		}
+	}
+	else if (keysym >= XK_1 && keysym <= XK_4)
+	{
+		print_clean(s);
+		set_material(s->menu.objects, keysym);
+		reset_progressive_render(s);
+	}
+	return (render_menu(s), 0);
+}

@@ -1,0 +1,65 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"C_Cpp.files.exclude": {
+			"**/.vscode": true,
+			"**/.vs": true,
+			"**/reference/**":true,
+			"**/.*":true,
+		},
+		"C_Cpp.codeAnalysis.exclude": {
+
+			"**/.*":true,
+			"*/reference/**":true,
+		},
+		"search.exclude": {
+			"**/.*": true,
+			"**/libs": true
+		},
+		"typescript.validate.enable": false,
+		"javascript.validate.enable": false,
+		"files.associations": {
+			"cstdlib": "c",
+			"charconv": "c",
+			"chrono": "c",
+			"optional": "c",
+			"format": "c",
+			"ratio": "c",
+			"system_error": "c",
+			"array": "c",
+			"functional": "c",
+			"tuple": "c",
+			"type_traits": "c",
+			"utility": "c",
+			"libft.h": "c",
+			"keysymdef.h": "c",
+			"complex": "c",
+			"random": "c",
+			"limits": "c",
+			"readline.h": "c",
+			"libft_define.h": "c",
+			"minirt.h": "c",
+			"compare": "c",
+			"minirt_define.h": "c",
+			"unistd.h": "c",
+			"limits.h": "c",
+			"debug.h": "c",
+			"algorithm": "c",
+			"mlx_int.h": "c",
+			"variant": "c",
+			"string": "c",
+			"string_view": "c",
+			"span": "c",
+			"deque": "c",
+			"unordered_map": "c",
+			"vector": "c",
+			"initializer_list": "c",
+			"text_encoding": "c",
+			"errno.h": "c"
+		}
+	}
+}

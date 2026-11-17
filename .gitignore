@@ -1,0 +1,93 @@
+# to test
+# find . -not -path '*/\.*' | while read -r file; do git check-ignore -v "$file"; done
+#gitinclude
+
+# Prerequisites
+*.d
+
+# Object files
+*.o
+*.ko
+*.obj
+*.elf
+
+# Linker output
+*.ilk
+*.map
+*.exp
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Libraries
+*.lib
+*.a
+*.la
+*.lo
+
+# Shared objects (inc. Windows DLLs)
+*.dll
+*.so
+*.so.*
+*.dylib
+
+# Executables
+*.exe
+*.out
+*.app
+*.i*86
+*.x86_64
+*.hex
+
+# Debug files
+*.dSYM/
+*.su
+*.idb
+*.pdb
+
+# Kernel Module Compile Results
+*.mod*
+*.cmd
+.tmp_versions/
+modules.order
+Module.symvers
+Mkfile.old
+dkms.conf
+
+#directories
+.temp/
+.stuff/
+.temp/*
+.stuff/*
+lib/mlx_linux/*.a
+reference/*
+.github
+.github/*
+c_report
+c_report/*
+*.xml
+leaks_err_only
+miniRT_proj-cppcheck-build-dir
+.vscode/
+
+# Compliance with 42 rules
+en.subject_8-5.pdf
+# *.code-workspace
+# *.md
+
+# User-specific files
+.DS_Store
+miniRT
+vgcore.*
+gmon.out
+.agents.md
+*.sh
+
+!*.c
+!.gitignore
+!textures/*_converter.sh
+!reference/assets_src
+!reference/dice
+!/reference/screenshots
+!reference/Stanford EE267_ Virtual Reality report_siu_ikoma.pdf

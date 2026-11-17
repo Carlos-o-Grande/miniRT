@@ -1,0 +1,57 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   render_menu.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cjoao-de <cjoao-de@student.42lisboa.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/04 03:41:19 by cjoao-de          #+#    #+#             */
+/*   Updated: 2025/04/20 17:57:32 by cjoao-de         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../includes/minirt.h"
+
+int	render_menu(t_minirt *s)
+{
+	char	*progress_str;
+
+	set_bk_color(s->menu.img.data, WHITE, MW * MH * 4);
+	join_xpm_sprite(s->menu.img, s->assets.bt_render, \
+		(t_coord){{(MW - s->assets.bt_render.img.width) - 80, 350}}, s->render);
+	join_xpm_sprite(s->menu.img, s->assets.label_figures,
+		(t_coord){{40, 40}}, object_type(s->menu.objects));
+	join_xpm_sprite(s->menu.img, s->assets.label_materials,
+		(t_coord){{40, 134}}, object_material(s->menu.objects).type - 1);
+	draw_color_picker(s);
+	draw_gradients(s);
+	draw_gradient_values(s);
+	draw_quality_picker(s);
+	mlx_put_image_to_window(s->mlx, s->win_menu, s->menu.img.image, 0, 0);
+	draw_help(s, 300, 455);
+	draw_labels(s, 335, 242);
+	if (s->scene.cam.progressive_enabled)
+	{
+		progress_str = ft_itoa(s->scene.cam.progressive_pass_count);
+		mlx_string_put(s->mlx, s->win_menu, 300, 430,
+			BLACK, "Progressive Mode: ON");
+		mlx_string_put(s->mlx, s->win_menu, 300, 445, BLACK, "Pass: ");
+		mlx_string_put(s->mlx, s->win_menu, 345, 445, BLACK, progress_str);
+		free(progress_str);
+	}
+	draw_radio(s, (t_circle){60, 450, 20, BLACK},
+		"Restore", s->menu.radio_one);
+	draw_radio(s, (t_circle){60, 500, 20, BLACK},
+		"Show Anaglyph", s->menu.radio_three);
+	draw_radio(s, (t_circle){60, 550, 20, BLACK},
+		"Show Left eye / Right eye", s->menu.radio_two);
+	draw_radio(s, (t_circle){60, 600, 20, BLACK},
+		"Create Anaglyph", s->menu.radio_four);
+	draw_radio(s, (t_circle){60, 640, 20, BLACK},
+		"Create Anaglyph (z-buffer)", s->menu.radio_five);
+	draw_radio(s, (t_circle){60, 680, 20, BLACK},
+		"Show Z-Buffer (depth map)", s->menu.radio_six);
+	draw_radio(s, (t_circle){60, 720, 20, BLACK},
+		"Toggle Z-Buffer Red/Cyan", s->menu.radio_seven);
+	return (0);
+}
